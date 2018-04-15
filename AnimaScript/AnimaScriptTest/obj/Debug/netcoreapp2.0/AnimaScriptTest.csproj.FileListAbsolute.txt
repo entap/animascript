@@ -1,0 +1,16 @@
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/xunit.runner.utility.netstandard15.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/xunit.runner.reporters.netstandard15.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScriptTest.deps.json
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScriptTest.runtimeconfig.json
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScriptTest.runtimeconfig.dev.json
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScriptTest.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScriptTest.pdb
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScript.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScript.pdb
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.csprojResolveAssemblyReference.cache
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.csproj.CoreCompileInputs.cache
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.AssemblyInfoInputs.cache
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.AssemblyInfo.cs
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.pdb
