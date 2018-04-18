@@ -10,7 +10,7 @@ namespace Entap.AnimaScript
 		public int LineNumber;
 
 		/// <summary>
-		/// <see cref="T:SyntaxErrorException"/> クラスを初期化する
+		/// <see cref="T:AnimaScriptException"/> クラスを初期化する
 		/// </summary>
 		/// <param name="message">エラー内容を説明する文字列</param>
 		/// <param name="lineNumber">行番号</param>
@@ -20,7 +20,7 @@ namespace Entap.AnimaScript
 		}
 
 		/// <summary>
-		/// <see cref="T:SyntaxErrorException"/> クラスを初期化する
+		/// <see cref="T:AnimaScriptException"/> クラスを初期化する
 		/// </summary>
 		/// <param name="message">エラー内容を説明する文字列</param>
 		/// <param name="command">エラーの原因となった命令</param>

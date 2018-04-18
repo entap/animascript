@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Entap.AnimaScript
 {
-	using CommandList = List<Command>;
+	using AnimaScriptCommandList = List<Command>;
 	using LabelDictionary = Dictionary<string, int>;
 
 	/// <summary>
@@ -12,7 +13,7 @@ namespace Entap.AnimaScript
 	/// </summary>
 	public class CommandBlock
 	{
-		CommandList _commands;
+		readonly AnimaScriptCommandList _commands;
 		LabelDictionary _labels;
 
 		/// <summary>
@@ -30,19 +31,10 @@ namespace Entap.AnimaScript
 		}
 
 		/// <summary>
-		/// <see cref="T:Entap.AnimaScript.ScriptBlock"/> クラスのインスタンスを初期化する。
+		/// <see cref="T:Entap.AnimaScript.CommandBlock"/> クラスのインスタンスを初期化する。
 		/// </summary>
 		/// <param name="reader">文字の入力元</param>
 		public CommandBlock(TextReader reader)
-		{
-			SetScript(reader);
-		}
-
-		/// <summary>
-		/// スクリプト文を設定する。
-		/// </summary>
-		/// <param name="reader">入力</param>
-		public void SetScript(TextReader reader)
 		{
 			_commands = Lexer.ReadAll(reader);
 			TranslateIfStatement(_commands, out _commands);
@@ -56,12 +48,12 @@ namespace Entap.AnimaScript
 		/// </summary>
 		/// <param name="src">トークン配列の入力変数</param>
 		/// <param name="dest">トークン配列の出力変数</param>
-		static void TranslateIfStatement(CommandList src, out CommandList dest)
+		static void TranslateIfStatement(AnimaScriptCommandList src, out AnimaScriptCommandList dest)
 		{
 			var unique = 0;
 			var uStack = new Stack<int>();
 			var eStack = new Stack<int>();
-			dest = new CommandList();
+			dest = new AnimaScriptCommandList();
 			foreach (var command in src) {
 				int u, e;
 				switch (command.Name) {
@@ -77,12 +69,12 @@ namespace Entap.AnimaScript
 					case "else":
 						// elif文かelse文
 						if (uStack.Count == 0) {
-							throw new AnimaScriptException("if文が足りません", command.LineNumber);
+							throw new AnimaScriptException("Not enough if", command.LineNumber);
 						}
 						u = uStack.Peek();
 						e = eStack.Pop();
 						if (e == -1) {
-							throw new AnimaScriptException("Endif文が足りません", command.LineNumber);
+							throw new AnimaScriptException("Not enough endif", command.LineNumber);
 						}
 						dest.Add(new Command(command.LineNumber, "jump", "target", EndIfLabel(u)));
 						dest.Add(new Command(command.LineNumber, "label", "name", ElifLabel(u, e)));
@@ -145,15 +137,15 @@ namespace Entap.AnimaScript
 		/// <param name="src">トークン配列の入力変数</param>
 		/// <param name="dest">トークン配列の出力変数</param>
 		/// <param name="labels">ラベル辞書の出力変数</param>
-		static void InitLabels(CommandList src, out CommandList dest, out LabelDictionary labels)
+		static void InitLabels(AnimaScriptCommandList src, out AnimaScriptCommandList dest, out LabelDictionary labels)
 		{
 			labels = new LabelDictionary();
-			dest = new CommandList();
+			dest = new AnimaScriptCommandList();
 			foreach (var command in src) {
 				if (command.Name == "label") {
 					var labelName = command.GetParameter<string>("name");
 					if (labels.ContainsKey(labelName)) {
-						throw new AnimaScriptException("ラベル " + labelName + " が重複しています", command.LineNumber);
+						throw new AnimaScriptException("Duplicate label: " + labelName, command.LineNumber);
 					}
 					labels.Add(labelName, dest.Count);
 				} else {

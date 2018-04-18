@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Entap.AnimaScript
@@ -25,7 +26,7 @@ namespace Entap.AnimaScript
 		}
 
 		/// <summary>
-		/// <see cref="T:Entap.AnimaScript.Lexer"/> クラスのインスタンスを初期化する。
+		/// <see cref="T:Entap.AnimaScript.AnimaScriptLexer"/> クラスのインスタンスを初期化する。
 		/// </summary>
 		/// <param name="reader">入力</param>
 		public Lexer(TextReader reader)
@@ -165,7 +166,7 @@ namespace Entap.AnimaScript
 						c1 = PeekChar();
 						NextChar();
 						if (c1 == -1) {
-							throw new AnimaScriptException("コメントが閉じていません", LineNumber);
+							throw new AnimaScriptException("Unclosed comment", LineNumber);
 						}
 						if (c1 == '*') {
 							if (PeekChar() == '/') {
@@ -205,7 +206,7 @@ namespace Entap.AnimaScript
 				NextChar();
 				var s = ReadWhile(c => c != q && c != '\n');
 				if (PeekChar() == -1) {
-					throw new AnimaScriptException("引用符が足りません", LineNumber);
+					throw new AnimaScriptException("Unclosed quote", LineNumber);
 				}
 				NextChar();
 				return s;
@@ -227,10 +228,10 @@ namespace Entap.AnimaScript
 				SkipWhiteSpace();
 				var c = PeekChar();
 				if (c == '=') {
-					throw new AnimaScriptException("期待しない文字 '='", LineNumber);
+					throw new AnimaScriptException("Unexpected char '='", LineNumber);
 				}
 				if (c == -1) {
-					throw new AnimaScriptException("タグが閉じていません", LineNumber);
+					throw new AnimaScriptException("Unclosed tag", LineNumber);
 				}
 				if (c == ']') {
 					NextChar();
@@ -260,7 +261,7 @@ namespace Entap.AnimaScript
 			SkipWhiteSpace();
 			var labelName = ReadWord().ToString();
 			if (labelName.Length == 0) {
-				throw new AnimaScriptException("ラベルが不正", LineNumber);
+				throw new AnimaScriptException("Incorrect label format", LineNumber);
 			}
 			command.Name = "label";
 			command.AddParameter("name", labelName);
@@ -281,7 +282,7 @@ namespace Entap.AnimaScript
 					break; // 区切り文字・改行・ファイル終了のいずれか
 				}
 				if (c == ']') {
-					throw new AnimaScriptException("メッセージ中に']'は直接記述できません", LineNumber);
+					throw new AnimaScriptException("Unexpected char ']'", LineNumber);
 				}
 				if (c == '/') {
 					NextChar();

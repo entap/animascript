@@ -1,7 +1,6 @@
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/bin/Debug/netcoreapp2.0/AnimaScript.deps.json
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/bin/Debug/netcoreapp2.0/AnimaScript.dll
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/bin/Debug/netcoreapp2.0/AnimaScript.pdb
-/Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/obj/Debug/netcoreapp2.0/AnimaScript.csprojResolveAssemblyReference.cache
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/obj/Debug/netcoreapp2.0/AnimaScript.csproj.CoreCompileInputs.cache
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/obj/Debug/netcoreapp2.0/AnimaScript.AssemblyInfoInputs.cache
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScript/obj/Debug/netcoreapp2.0/AnimaScript.AssemblyInfo.cs

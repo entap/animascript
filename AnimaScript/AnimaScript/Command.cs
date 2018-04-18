@@ -38,7 +38,7 @@ namespace Entap.AnimaScript
 		}
 
 		/// <summary>
-		/// <see cref="T:Entap.AnimaScript.ScriptTag"/> クラスのインスタンスを初期化する。
+		/// <see cref="T:Entap.AnimaScript.Command"/> クラスのインスタンスを初期化する。
 		/// </summary>
 		/// <param name="lineNumber">行番号</param>
 		/// <param name="name">命令の名前</param>
@@ -71,12 +71,12 @@ namespace Entap.AnimaScript
 		public T GetParameter<T>(string name)
 		{
 			if (!Parameters.ContainsKey(name)) {
-				throw new AnimaScriptException("パラメータ " + name + " は必須です", LineNumber);
+				throw new AnimaScriptException("Parameter " + name + " is required", LineNumber);
 			}
 			try {
 				return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(Parameters[name]);
 			} catch (Exception) {
-				throw new AnimaScriptException("パラメータ " + name + " の形式が不正です", LineNumber);
+				throw new AnimaScriptException("Incorrect format paramter " + name, LineNumber);
 			}
 		}
 

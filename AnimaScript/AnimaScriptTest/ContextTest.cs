@@ -44,7 +44,7 @@ namespace Entap.AnimaScript.Test
 
 			// 外部スクリプトの呼び出し
 			param = 0;
-			ctx.ScriptLoader = (name) => {
+			ctx.Loader = (name) => {
 				return new StringReader("[testSet param=1234]");
 			};
 			ctx.SetScript("[jump script=abc]");
@@ -75,7 +75,7 @@ namespace Entap.AnimaScript.Test
 			// 外部スクリプトの呼び出し
 			param = 0;
 			ctx.Clear();
-			ctx.ScriptLoader = (name) => {
+			ctx.Loader = (name) => {
 				return new StringReader("*set1234[testSet param=1234][return]");
 			};
 			ctx.SetScript("[call to=set1234 script=abc]");

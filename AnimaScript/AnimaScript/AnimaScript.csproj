@@ -8,11 +8,11 @@
     <Compile Remove="Class1.cs" />
     <Compile Remove="Tokenizer.cs" />
     <Compile Remove="ScriptParser.cs" />
+    <Compile Remove="Expression\Expression.cs" />
+    <Compile Remove="Expression\Identifier.cs" />
+    <Compile Remove="Expression\Lexer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Expression\" />
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ namespace Entap.AnimaScript
 	/// <summary>
 	/// 外部スクリプトを読み込むデリゲート
 	/// </summary>
-	public delegate TextReader ScriptLoaderDelegate(string name);
+	public delegate TextReader LoaderDelegate(string name);
 
 	/// <summary>
 	/// コマンドを実行するデリゲート
@@ -16,7 +16,7 @@ namespace Entap.AnimaScript
 	public delegate void FunctionDelegate(Context context, Command command);
 
 	/// <summary>
-	/// 実行状態
+	/// AnimaScriptの実行コンテキスト
 	/// </summary>
 	public class Context
 	{
@@ -35,7 +35,7 @@ namespace Entap.AnimaScript
 		/// <summary>
 		/// 外部スクリプトを読み込むデリゲート
 		/// </summary>
-		public ScriptLoaderDelegate ScriptLoader;
+		public LoaderDelegate Loader;
 
 		/// <summary>
 		/// <see cref="T:Entap.AnimaScript.Context"/> クラスのインスタンスを初期化する。
@@ -86,7 +86,7 @@ namespace Entap.AnimaScript
 				if (_scripts.ContainsKey(scriptName)) {
 					block = _scripts[scriptName];
 				} else {
-					block = new CommandBlock(ScriptLoader(scriptName));
+					block = new CommandBlock(Loader(scriptName));
 					_scripts[scriptName] = block;
 				}
 
@@ -106,7 +106,7 @@ namespace Entap.AnimaScript
 					_addressStack.Push(address);
 				} else {
 					int lineNumber = command != null ? command.LineNumber : 0;
-					throw new AnimaScriptException("ラベル " + label + " が見つかりません", lineNumber);
+					throw new AnimaScriptException("Label not found: " + label, lineNumber);
 				}
 			}
 		}
@@ -120,7 +120,7 @@ namespace Entap.AnimaScript
 		public void Call(string scriptName, string label, Command command = null)
 		{
 			if (_blockStack.Count > CallStackMax) {
-				throw new AnimaScriptException("スタックオーバーフロー", command);
+				throw new AnimaScriptException("Stack overflow", command);
 			}
 			_blockStack.Push(_blockStack.Peek());
 			_addressStack.Push(0);
@@ -134,7 +134,7 @@ namespace Entap.AnimaScript
 		public void Return(Command command)
 		{
 			if (_blockStack.Count == 0) {
-				throw new AnimaScriptException("サブルーチンの外でreturnが呼ばれました", command);
+				throw new AnimaScriptException("Can't return outside a subroutine", command);
 			}
 			_blockStack.Pop();
 			_addressStack.Pop();
@@ -158,8 +158,7 @@ namespace Entap.AnimaScript
 		{
 			var type = module.GetType();
 			foreach (var mi in type.GetMethods()) {
-				var p = mi.GetParameters();
-				if (p.Length == 2 && p[0].ParameterType == typeof(Context) && p[1].ParameterType == typeof(Command)) {
+				if (IsAnimaScriptMethod(mi)) {
 					DefineFunction(mi.Name, (context, command) => {
 						try {
 							mi.Invoke(module, new object[] { context, command });
@@ -169,6 +168,21 @@ namespace Entap.AnimaScript
 					});
 				}
 			}
+		}
+
+		/// <summary>
+		/// 指定されたメソッド情報がAnimaScriptのコマンド実行をできるか判定する
+		/// </summary>
+		/// <returns>AnimaScriptのコマンド実行をできるなら<c>true</c>、そうでないなら<c>false</c></returns>
+		/// <param name="mi">Mi.</param>
+		static bool IsAnimaScriptMethod(MethodInfo mi)
+		{
+			var p = mi.GetParameters();
+			return
+				p.Length == 2 &&
+				p[0].ParameterType == typeof(Context) &&
+				p[1].ParameterType == typeof(Command);
+			
 		}
 
 		/// <summary>
@@ -196,7 +210,7 @@ namespace Entap.AnimaScript
 			if (_functions.ContainsKey(commandName)) {
 				_functions[commandName].Invoke(this, command);
 			} else {
-				throw new AnimaScriptException("関数 " + command.Name + " が見つかりません", command.LineNumber);
+				throw new AnimaScriptException("Command not found: " + command.Name, command.LineNumber);
 			}
 		}
 

@@ -13,7 +13,7 @@ namespace Entap.AnimaScript
 			var label = command.GetParameter<string>("to", null);
 			var script = command.GetParameter<string>("script", null);
 			if (label == null && script == null) {
-				throw new AnimaScriptException("toかscriptパラメータが必要です", command);
+				throw new AnimaScriptException("Parameter 'to' or 'script' is required", command);
 			}
 			context.Jump(script, label, command);
 		}
@@ -28,7 +28,7 @@ namespace Entap.AnimaScript
 			var label = command.GetParameter<string>("to", null);
 			var script = command.GetParameter<string>("script", null);
 			if (label == null && script == null) {
-				throw new AnimaScriptException("toかscriptパラメータが必要です", command);
+				throw new AnimaScriptException("Parameter 'to' or 'script' is required", command);
 			}
 			context.Call(script, label, command);
 		}
