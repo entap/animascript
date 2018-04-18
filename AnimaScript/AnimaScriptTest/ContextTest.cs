@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Xunit;
+using Entap.AnimaScript;
 
 namespace Entap.AnimaScript.Test
 {
