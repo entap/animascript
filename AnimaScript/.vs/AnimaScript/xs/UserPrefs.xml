@@ -9,7 +9,7 @@
       <File FileName="../Expr/Expr/Expr/Parser.cs" Line="204" Column="56" />
       <File FileName="../Expr/Expr/Expr/VariableExpression.cs" Line="7" Column="2" />
       <File FileName="AnimaScriptTest/ContextTest.cs" Line="42" Column="48" />
-      <File FileName="../Expr/Expr/Expr/BinaryExpression.cs" Line="11" Column="3" />
+      <File FileName="../Expr/Expr/Expr/BinaryExpression.cs" Line="8" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
