@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "AnimaScript/1.0.0": {
+        "dependencies": {
+          "Expr": "1.0.0"
+        },
         "runtime": {
           "AnimaScript.dll": {}
+        }
+      },
+      "Expr/1.0.0": {
+        "runtime": {
+          "Expr.dll": {}
         }
       }
     }
   },
   "libraries": {
     "AnimaScript/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Expr/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

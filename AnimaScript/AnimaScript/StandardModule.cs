@@ -1,4 +1,6 @@
-﻿namespace Entap.AnimaScript
+﻿using Entap.Expr;
+
+namespace Entap.AnimaScript
 {
 	public class StandardModule
 	{
@@ -50,8 +52,9 @@
 		public void If(Context context, Command command)
 		{
 			var exp = command.GetParameter<string>("exp");
-			System.Collections.Generic.Dictionary<string, object> variables = context.Variables;
-			var b = Expr.Expr.Eval(exp, variables).AsBool();
+			if (!Expression.Evaluate<bool>(exp, context.Variables)) {
+				context.Jump(null, command.GetParameter<string>("*next"));
+			}
 		}
 
 		/// <summary>
@@ -62,6 +65,18 @@
 		public void Elif(Context context, Command command)
 		{
 			If(context, command);
+		}
+
+		/// <summary>
+		/// Set文を実行する。
+		/// </summary>
+		/// <param name="context">実行状態</param>
+		/// <param name="command">命令</param>
+		public void Set(Context context, Command command)
+		{
+			var var = command.GetParameter<string>("var");
+			var exp = command.GetParameter<string>("exp");
+			context.Variables[var] = Expression.Evaluate<object>(exp, context.Variables);
 		}
 	}
 }

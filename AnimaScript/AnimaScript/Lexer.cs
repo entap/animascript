@@ -9,7 +9,7 @@ namespace Entap.AnimaScript
 	/// <summary>
 	/// AnimaScriptのスクリプトを字句解析する。
 	/// </summary>
-	internal class Lexer
+	class Lexer
 	{
 		TextReader _reader;
 		Stack<char> _buffer;

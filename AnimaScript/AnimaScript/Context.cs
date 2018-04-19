@@ -237,7 +237,9 @@ namespace Entap.AnimaScript
 			_yield = false;
 			var command = FetchCommand();
 			while (command != null && !_yield) {
-				ExecuteCommand(command);
+				if (command.CheckCondition(this)) {
+					ExecuteCommand(command);
+				}
 				command = FetchCommand();
 			}
 		}

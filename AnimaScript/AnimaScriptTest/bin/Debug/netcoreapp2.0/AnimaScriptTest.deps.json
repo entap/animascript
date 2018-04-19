@@ -1026,8 +1026,16 @@
         }
       },
       "AnimaScript/1.0.0": {
+        "dependencies": {
+          "Expr": "1.0.0"
+        },
         "runtime": {
           "AnimaScript.dll": {}
+        }
+      },
+      "Expr/1.0.0": {
+        "runtime": {
+          "Expr.dll": {}
         }
       }
     }
@@ -1564,6 +1572,11 @@
       "hashPath": "xunit.runner.visualstudio.2.2.0.nupkg.sha512"
     },
     "AnimaScript/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Expr/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Entap.Expr;
 
 namespace Entap.AnimaScript
 {
@@ -89,6 +90,17 @@ namespace Entap.AnimaScript
 		public T GetParameter<T>(string name, T defaultValue)
 		{
 			return Parameters.ContainsKey(name) ? GetParameter<T>(name) : defaultValue;
+		}
+
+		/// <summary>
+		/// 実行する条件(condパラメータ)が満たされたか判定する。
+		/// </summary>
+		/// <returns>実行する条件が見たらされたら<c>true</c>、そうでないなら<c>false</c></returns>
+		/// <param name="context">実行コンテキスト</param>
+		public bool CheckCondition(Context context)
+		{
+			var cond = GetParameter<string>("cond", null);
+			return cond == null || Expression.Evaluate<bool>(cond, context.Variables);
 		}
 	}
 }

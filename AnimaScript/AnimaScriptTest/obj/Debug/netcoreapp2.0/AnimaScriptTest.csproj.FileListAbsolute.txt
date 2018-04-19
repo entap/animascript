@@ -14,3 +14,5 @@
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/AnimaScript.pdb
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.dll
 /Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/obj/Debug/netcoreapp2.0/AnimaScriptTest.pdb
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/Expr.dll
+/Users/matsuoka/Works/animascript/AnimaScript/AnimaScriptTest/bin/Debug/netcoreapp2.0/Expr.pdb
