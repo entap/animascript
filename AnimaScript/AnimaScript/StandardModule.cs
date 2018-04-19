@@ -50,7 +50,8 @@
 		public void If(Context context, Command command)
 		{
 			var exp = command.GetParameter<string>("exp");
-			var eval = Expression.Expression.Evaluate(exp, context.Variables);
+			System.Collections.Generic.Dictionary<string, object> variables = context.Variables;
+			var b = Expr.Expr.Eval(exp, variables).AsBool();
 		}
 
 		/// <summary>

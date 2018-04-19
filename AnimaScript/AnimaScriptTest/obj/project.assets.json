@@ -1663,11 +1663,24 @@
       "AnimaScript/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Expr": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/AnimaScript.dll": {}
         },
         "runtime": {
           "bin/placeholder/AnimaScript.dll": {}
+        }
+      },
+      "Expr/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Expr.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Expr.dll": {}
         }
       }
     }
@@ -5619,6 +5632,11 @@
       "type": "project",
       "path": "../AnimaScript/AnimaScript.csproj",
       "msbuildProject": "../AnimaScript/AnimaScript.csproj"
+    },
+    "Expr/1.0.0": {
+      "type": "project",
+      "path": "../../Expr/Expr/Expr/Expr.csproj",
+      "msbuildProject": "../../Expr/Expr/Expr/Expr.csproj"
     }
   },
   "projectFileDependencyGroups": {
