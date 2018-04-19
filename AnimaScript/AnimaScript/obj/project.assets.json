@@ -196,6 +196,16 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Expression/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Expression.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Expression.dll": {}
+        }
       }
     }
   },
@@ -656,10 +666,16 @@
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Expression/1.0.0": {
+      "type": "project",
+      "path": "../../Expression/Expression/Expression/Expression.csproj",
+      "msbuildProject": "../../Expression/Expression/Expression/Expression.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Expression >= 1.0.0",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -690,7 +706,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/matsuoka/Works/animascript/Expression/Expression/Expression/Expression.csproj": {
+              "projectPath": "/Users/matsuoka/Works/animascript/Expression/Expression/Expression/Expression.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

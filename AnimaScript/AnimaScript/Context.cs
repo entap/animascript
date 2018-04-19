@@ -13,7 +13,7 @@ namespace Entap.AnimaScript
 	/// <summary>
 	/// コマンドを実行するデリゲート
 	/// </summary>
-	public delegate void FunctionDelegate(Context context, Command command);
+	public delegate void CommandFuncDelegate(Context context, Command command);
 
 	/// <summary>
 	/// AnimaScriptの実行コンテキスト
@@ -22,7 +22,7 @@ namespace Entap.AnimaScript
 	{
 		Dictionary<string, CommandBlock> _scripts;
 		Dictionary<string, object> _vars;
-		Dictionary<string, FunctionDelegate> _functions;
+		Dictionary<string, CommandFuncDelegate> _funcs;
 		Stack<CommandBlock> _blockStack;
 		Stack<int> _addressStack;
 		bool _yield;
@@ -38,13 +38,21 @@ namespace Entap.AnimaScript
 		public LoaderDelegate Loader;
 
 		/// <summary>
+		/// 変数の辞書を取得する。
+		/// </summary>
+		/// <value>変数の辞書</value>
+		public Dictionary<string, object> Variables {
+			get => _vars;
+		}
+
+		/// <summary>
 		/// <see cref="T:Entap.AnimaScript.Context"/> クラスのインスタンスを初期化する。
 		/// </summary>
 		public Context()
 		{
 			_scripts = new Dictionary<string, CommandBlock>();
 			_vars = new Dictionary<string, object>();
-			_functions = new Dictionary<string, FunctionDelegate>();
+			_funcs = new Dictionary<string, CommandFuncDelegate>();
 			Clear();
 			LoadModule(new StandardModule());
 		}
@@ -144,10 +152,10 @@ namespace Entap.AnimaScript
 		/// 命令を実行する関数を登録する。
 		/// </summary>
 		/// <param name="name">命令の名前</param>
-		/// <param name="function">命令の実行する関数</param>
-		public void DefineFunction(string name, FunctionDelegate function)
+		/// <param name="func">命令の実行する関数</param>
+		public void DefineFunction(string name, CommandFuncDelegate func)
 		{
-			_functions[name.ToLower()] = function;
+			_funcs[name.ToLower()] = func;
 		}
 
 		/// <summary>
@@ -177,12 +185,12 @@ namespace Entap.AnimaScript
 		/// <param name="mi">Mi.</param>
 		static bool IsAnimaScriptMethod(MethodInfo mi)
 		{
-			var p = mi.GetParameters();
+			var parameters = mi.GetParameters();
 			return
-				p.Length == 2 &&
-				p[0].ParameterType == typeof(Context) &&
-				p[1].ParameterType == typeof(Command);
-			
+				parameters.Length == 2 &&
+				parameters[0].ParameterType == typeof(Context) &&
+				parameters[1].ParameterType == typeof(Command);
+
 		}
 
 		/// <summary>
@@ -207,8 +215,8 @@ namespace Entap.AnimaScript
 		void ExecuteCommand(Command command)
 		{
 			var commandName = command.Name.ToLower();
-			if (_functions.ContainsKey(commandName)) {
-				_functions[commandName].Invoke(this, command);
+			if (_funcs.ContainsKey(commandName)) {
+				_funcs[commandName].Invoke(this, command);
 			} else {
 				throw new AnimaScriptException("Command not found: " + command.Name, command.LineNumber);
 			}

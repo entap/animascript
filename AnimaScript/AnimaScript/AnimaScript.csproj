@@ -15,4 +15,7 @@
   <ItemGroup>
     <None Remove="Settings.StyleCop" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Expression\Expression\Expression\Expression.csproj" />
+  </ItemGroup>
 </Project>

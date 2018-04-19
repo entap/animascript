@@ -1,5 +1,4 @@
-﻿using System;
-namespace Entap.AnimaScript
+﻿namespace Entap.AnimaScript
 {
 	public class StandardModule
 	{
@@ -50,6 +49,8 @@ namespace Entap.AnimaScript
 		/// <param name="command">命令</param>
 		public void If(Context context, Command command)
 		{
+			var exp = command.GetParameter<string>("exp");
+			var eval = Expression.Expression.Evaluate(exp, context.Variables);
 		}
 
 		/// <summary>
