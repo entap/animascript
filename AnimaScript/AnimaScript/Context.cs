@@ -41,7 +41,9 @@ namespace Entap.AnimaScript
 		/// </summary>
 		/// <value>変数の辞書</value>
 		public Dictionary<string, object> Variables {
-			get => _vars;
+			get {
+				return _vars;
+			}
 		}
 
 		/// <summary>

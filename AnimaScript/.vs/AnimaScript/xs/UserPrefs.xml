@@ -1,17 +1,5 @@
 ﻿<Properties StartupConfiguration="{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../Expr/Expr/Expr/BinaryExpression.cs">
-    <Files>
-      <File FileName="AnimaScript/StandardModule.cs" Line="69" Column="3" />
-      <File FileName="AnimaScript/CommandBlock.cs" Line="1" Column="1" />
-      <File FileName="AnimaScript/Lexer.cs" Line="17" Column="3" />
-      <File FileName="../Expr/Expr/Expr/Value.cs" Line="163" Column="34" />
-      <File FileName="../Expr/Expr/Expr/Math.cs" Line="118" Column="12" />
-      <File FileName="../Expr/Expr/Expr/Parser.cs" Line="204" Column="56" />
-      <File FileName="../Expr/Expr/Expr/VariableExpression.cs" Line="7" Column="2" />
-      <File FileName="AnimaScriptTest/ContextTest.cs" Line="42" Column="48" />
-      <File FileName="../Expr/Expr/Expr/BinaryExpression.cs" Line="8" Column="23" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
