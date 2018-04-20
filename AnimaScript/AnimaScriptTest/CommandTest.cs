@@ -1,5 +1,5 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 using Entap.AnimaScript;
 using System.IO;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Entap.AnimaScript.Test
 {
 	public class CommandTest
 	{
-		[Fact]
+		[Test]
 		public void CommandParamsTest()
 		{
 			var command = new Command();
@@ -18,13 +18,13 @@ namespace Entap.AnimaScript.Test
 			command.AddParameter("i", "1111");
 			command.AddParameter("f", "1.11");
 			command.AddParameter("b", "true");
-			Assert.Equal(command.GetParameter("s", "****"), "ssss");
-			Assert.Equal(command.GetParameter<int>("i", 0), 1111);
-			Assert.Equal(command.GetParameter<float>("f", 0), 1.11, 3);
-			Assert.Equal(command.GetParameter<bool>("b", false), true);
+			Assert.AreEqual(command.GetParameter("s", "****"), "ssss");
+			Assert.AreEqual(command.GetParameter<int>("i", 0), 1111);
+			Assert.AreEqual(command.GetParameter<float>("f", 0), 1.11, 3);
+			Assert.AreEqual(command.GetParameter<bool>("b", false), true);
 		}
 
-		[Fact]
+		[Test]
 		public void CommandSyntaxErrorTest()
 		{
 			var command = new Command();

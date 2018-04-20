@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using Xunit;
+using NUnit.Framework;
 using Entap.AnimaScript;
 
 namespace Entap.AnimaScript.Test
 {
 	public class ContextTest
 	{
-		[Fact]
+		[Test]
 		public void ExecuteTest()
 		{
 			int param = 0;
@@ -20,10 +20,10 @@ namespace Entap.AnimaScript.Test
 			});
 			ctx.SetScript("[testSet param=1234][testAdd param=1][testAdd param=2]", null);
 			ctx.Execute();
-			Assert.Equal(1237, param);
+			Assert.AreEqual(1237, param);
 		}
 
-		[Fact]
+		[Test]
 		public void JumpTest()
 		{
 			int param = 0;
@@ -35,7 +35,7 @@ namespace Entap.AnimaScript.Test
 			// ジャンプしたら[testSet param=2]は実行されないはず。
 			ctx.SetScript("[testSet param=1][jump to=a][testSet param=2]*a");
 			ctx.Execute();
-			Assert.Equal(1, param);
+			Assert.AreEqual(1, param);
 
 			// パラメータがないとエラー
 			ctx.SetScript("[jump]");
@@ -50,10 +50,10 @@ namespace Entap.AnimaScript.Test
 			};
 			ctx.SetScript("[jump script=abc]");
 			ctx.Execute();
-			Assert.Equal(1234, param);
+			Assert.AreEqual(1234, param);
 		}
 
-		[Fact]
+		[Test]
 		public void CallTest()
 		{
 			int param = 0;
@@ -65,7 +65,7 @@ namespace Entap.AnimaScript.Test
 			// コールして、[testSet param=1]を呼び出す。
 			ctx.SetScript("[jump to=a]*b[testSet param=1][return]*a[testSet param=2][call to=b]");
 			ctx.Execute();
-			Assert.Equal(1, param);
+			Assert.AreEqual(1, param);
 
 			// スタックオーバーフロー
 			ctx.SetScript("*a[call to=a]");
@@ -81,7 +81,7 @@ namespace Entap.AnimaScript.Test
 			};
 			ctx.SetScript("[call to=set1234 script=abc]");
 			ctx.Execute();
-			Assert.Equal(1234, param);
+			Assert.AreEqual(1234, param);
 		}
 	}
 }

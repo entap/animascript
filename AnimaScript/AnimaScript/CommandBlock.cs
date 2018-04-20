@@ -161,7 +161,8 @@ namespace Entap.AnimaScript
 		/// <param name="labelName">ラベルの名前</param>
 		public int LookUpLabel(string labelName)
 		{
-			return _labels.GetValueOrDefault(labelName, -1);
+			int address;
+			return _labels.TryGetValue(labelName, out address) ? address : -1;
 		}
 
 		/// <summary>

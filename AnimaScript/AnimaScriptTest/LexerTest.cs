@@ -1,5 +1,5 @@
-using System;
-using Xunit;
+﻿using System;
+using NUnit.Framework;
 using Entap.AnimaScript;
 using System.IO;
 using System.Collections.Generic;
@@ -9,18 +9,18 @@ namespace Entap.AnimaScript.Test
 {
 	public class LexerTest
 	{
-		[Fact]
+		[Test]
 		public void OnlyMessageTest()
 		{
 			var s = "abcdefg";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("message", command.Name);
-			Assert.Equal("abcdefg", command.GetParameter<string>("text"));
+			Assert.AreEqual("message", command.Name);
+			Assert.AreEqual("abcdefg", command.GetParameter<string>("text"));
 			Assert.Null(lexer.Read());
 		}
 
-		[Fact]
+		[Test]
 		public void OnlyCommentTest()
 		{
 			var s = @"//single line comment
@@ -32,32 +32,32 @@ aaa**/
 			Assert.Null(command);
 		}
 
-		[Fact]
+		[Test]
 		public void OnlyTagTest()
 		{
 			var s = @"[tag aaa=bbb ccc=""ddd"" eee='fff' ggg]";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("tag", command.Name);
-			Assert.Equal("bbb", command.GetParameter<string>("aaa"));
-			Assert.Equal("ddd", command.GetParameter<string>("ccc"));
-			Assert.Equal("fff", command.GetParameter<string>("eee"));
-			Assert.Equal("ggg", command.GetParameter<string>("ggg"));
+			Assert.AreEqual("tag", command.Name);
+			Assert.AreEqual("bbb", command.GetParameter<string>("aaa"));
+			Assert.AreEqual("ddd", command.GetParameter<string>("ccc"));
+			Assert.AreEqual("fff", command.GetParameter<string>("eee"));
+			Assert.AreEqual("ggg", command.GetParameter<string>("ggg"));
 			Assert.Null(lexer.Read());
 		}
 
-		[Fact]
+		[Test]
 		public void OnlyLabelTest()
 		{
 			var s = @"*labelName";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("label", command.Name);
-			Assert.Equal("labelName", command.GetParameter<string>("name"));
+			Assert.AreEqual("label", command.Name);
+			Assert.AreEqual("labelName", command.GetParameter<string>("name"));
 			Assert.Null(lexer.Read());
 		}
 
-		[Fact]
+		[Test]
 		public void MessageAndCommentTest()
 		{
 			var s = @"aaa
@@ -66,21 +66,21 @@ aaa**/
 eee/*fff*/ggg;aaa";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("message", command.Name);
-			Assert.Equal("aaa", command.GetParameter<string>("text"));
+			Assert.AreEqual("message", command.Name);
+			Assert.AreEqual("aaa", command.GetParameter<string>("text"));
 			command = lexer.Read();
-			Assert.Equal("message", command.Name);
-			Assert.Equal("/ccc", command.GetParameter<string>("text"));
+			Assert.AreEqual("message", command.Name);
+			Assert.AreEqual("/ccc", command.GetParameter<string>("text"));
 			command = lexer.Read();
-			Assert.Equal("message", command.Name);
-			Assert.Equal("eee", command.GetParameter<string>("text"));
+			Assert.AreEqual("message", command.Name);
+			Assert.AreEqual("eee", command.GetParameter<string>("text"));
 			command = lexer.Read();
-			Assert.Equal("message", command.Name);
-			Assert.Equal("ggg", command.GetParameter<string>("text"));
+			Assert.AreEqual("message", command.Name);
+			Assert.AreEqual("ggg", command.GetParameter<string>("text"));
 			Assert.Null(lexer.Read());
 		}
 
-		[Fact]
+		[Test]
 		public void TagAndCommentTest()
 		{
 			var s = @"[a]
@@ -89,16 +89,16 @@ eee/*fff*/ggg;aaa";
 [d]/*fff*/";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("a", command.Name);
+			Assert.AreEqual("a", command.Name);
 			command = lexer.Read();
-			Assert.Equal("b", command.Name);
-			Assert.Equal("d", command.GetParameter<string>("c"));
+			Assert.AreEqual("b", command.Name);
+			Assert.AreEqual("d", command.GetParameter<string>("c"));
 			command = lexer.Read();
-			Assert.Equal("d", command.Name);
+			Assert.AreEqual("d", command.Name);
 			Assert.Null(lexer.Read());
 		}
 
-		[Fact]
+		[Test]
 		public void LabelAndCommentTest()
 		{
 			var s = @"* label1
@@ -107,17 +107,17 @@ eee/*fff*/ggg;aaa";
 /**/* label4;comment";
 			var lexer = new Lexer(new StringReader(s));
 			var command = lexer.Read();
-			Assert.Equal("label", command.Name);
-			Assert.Equal("label1", command.GetParameter<string>("name"));
+			Assert.AreEqual("label", command.Name);
+			Assert.AreEqual("label1", command.GetParameter<string>("name"));
 			command = lexer.Read();
-			Assert.Equal("label", command.Name);
-			Assert.Equal("label2", command.GetParameter<string>("name"));
+			Assert.AreEqual("label", command.Name);
+			Assert.AreEqual("label2", command.GetParameter<string>("name"));
 			command = lexer.Read();
-			Assert.Equal("label", command.Name);
-			Assert.Equal("label3", command.GetParameter<string>("name"));
+			Assert.AreEqual("label", command.Name);
+			Assert.AreEqual("label3", command.GetParameter<string>("name"));
 			command = lexer.Read();
-			Assert.Equal("label", command.Name);
-			Assert.Equal("label4", command.GetParameter<string>("name"));
+			Assert.AreEqual("label", command.Name);
+			Assert.AreEqual("label4", command.GetParameter<string>("name"));
 		}
 
 	}

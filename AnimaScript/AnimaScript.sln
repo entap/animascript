@@ -1,11 +1,11 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimaScript", "AnimaScript\AnimaScript.csproj", "{4CE07AE5-C8D1-4625-98EA-797892770BDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimaScript", "AnimaScript\AnimaScript.csproj", "{97F77756-0EDE-4D4E-9953-A48B1EEA5424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimaScriptTest", "AnimaScriptTest\AnimaScriptTest.csproj", "{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimaScriptTest", "AnimaScriptTest\AnimaScriptTest.csproj", "{47AA5384-4780-4C1E-A578-854EDE2A5E40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expr", "..\Expr\Expr\Expr\Expr.csproj", "{A20694D1-75EA-43FA-8DC7-FB4EF38B7908}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expr", "..\Expr\Expr\Expr\Expr.csproj", "{4F07F565-7C14-4A38-AEC0-DB9922A712BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,17 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CE07AE5-C8D1-4625-98EA-797892770BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CE07AE5-C8D1-4625-98EA-797892770BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CE07AE5-C8D1-4625-98EA-797892770BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CE07AE5-C8D1-4625-98EA-797892770BDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96D2283E-AA4D-41A5-B5CF-5ACA583B36B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A20694D1-75EA-43FA-8DC7-FB4EF38B7908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A20694D1-75EA-43FA-8DC7-FB4EF38B7908}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A20694D1-75EA-43FA-8DC7-FB4EF38B7908}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A20694D1-75EA-43FA-8DC7-FB4EF38B7908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F77756-0EDE-4D4E-9953-A48B1EEA5424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F77756-0EDE-4D4E-9953-A48B1EEA5424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F77756-0EDE-4D4E-9953-A48B1EEA5424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F77756-0EDE-4D4E-9953-A48B1EEA5424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47AA5384-4780-4C1E-A578-854EDE2A5E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47AA5384-4780-4C1E-A578-854EDE2A5E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47AA5384-4780-4C1E-A578-854EDE2A5E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47AA5384-4780-4C1E-A578-854EDE2A5E40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F07F565-7C14-4A38-AEC0-DB9922A712BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F07F565-7C14-4A38-AEC0-DB9922A712BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F07F565-7C14-4A38-AEC0-DB9922A712BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F07F565-7C14-4A38-AEC0-DB9922A712BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

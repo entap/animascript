@@ -1,27 +1,50 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97F77756-0EDE-4D4E-9953-A48B1EEA5424}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AnimaScript</RootNamespace>
+    <AssemblyName>AnimaScript</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Class1.cs" />
-    <Compile Remove="Tokenizer.cs" />
-    <Compile Remove="ScriptParser.cs" />
-    <Compile Remove="Expression\Expression.cs" />
-    <Compile Remove="Expression\Identifier.cs" />
-    <Compile Remove="Expression\Lexer.cs" />
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Settings.StyleCop" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AnimaScriptException.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandBlock.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Lexer.cs" />
+    <Compile Include="StandardModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Expr\Expr\Expr\Expr.csproj" />
+    <ProjectReference Include="..\..\Expr\Expr\Expr\Expr.csproj">
+      <Project>{4F07F565-7C14-4A38-AEC0-DB9922A712BB}</Project>
+      <Name>Expr</Name>
+    </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
