@@ -4,6 +4,8 @@
 IfとかJumpとかの基本命令以外、何も実装していないがゆえに、様々なゲームにバインドできます。
 そのうち、色んな機能を入れるかもしれない。
 
+https://entap.github.io/animascript/index.html
+
 ## 文法
 ### コメント
 
