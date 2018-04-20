@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{47AA5384-4780-4C1E-A578-854EDE2A5E40}|単体テスト">
   <MonoDevelop.Ide.Workbench />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
