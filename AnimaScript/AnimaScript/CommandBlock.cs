@@ -11,7 +11,7 @@ namespace Entap.AnimaScript
 	/// <summary>
 	/// 命令ブロック
 	/// </summary>
-	public class CommandBlock
+	internal class CommandBlock
 	{
 		readonly AnimaScriptCommandList _commands;
 		LabelDictionary _labels;

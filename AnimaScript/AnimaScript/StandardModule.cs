@@ -2,7 +2,7 @@
 
 namespace Entap.AnimaScript
 {
-	public class StandardModule
+	internal class StandardModule
 	{
 		/// <summary>
 		/// 指定したスクリプト・ラベルにジャンプする。
