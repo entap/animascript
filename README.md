@@ -6,6 +6,10 @@ IfとかJumpとかの基本命令以外、何も実装していないがゆえ�
 
 https://entap.github.io/animascript/index.html
 
+## DLLのダウンロード(.NET framework 3.5)
+https://entap.github.io/animascript/Expr.dll
+https://entap.github.io/animascript/AnimaScript.dll
+
 ## 文法
 ### コメント
 
