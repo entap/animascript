@@ -1,5 +1,16 @@
 ﻿<Properties StartupConfiguration="{47AA5384-4780-4C1E-A578-854EDE2A5E40}|単体テスト">
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AnimaScript" expanded="True">
+            <Node name="AnimaScript" expanded="True" />
+            <Node name="AnimaScriptTest" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
@@ -7,4 +18,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.AnimaScriptTest PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <DisabledProjects>
+    <String>../Expr/Expr/Expr/Expr.csproj</String>
+  </DisabledProjects>
 </Properties>
