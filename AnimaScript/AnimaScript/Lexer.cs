@@ -74,6 +74,8 @@ namespace Entap.AnimaScript
 					return ReadTag();
 				case '*':
 					return ReadLabel();
+				case '@':
+					return ReadMeta();
 				default:
 					return ReadMessage();
 			}
@@ -265,6 +267,29 @@ namespace Entap.AnimaScript
 			}
 			command.Name = "label";
 			command.AddParameter("name", labelName);
+			return command;
+		}
+
+		/// <summary>
+		/// メタタグの構成文字として有効か？
+		/// </summary>
+		/// <returns>単語の構成文字として有効なら<c>true</c>, そうでないなら<c>false</c></returns>
+		/// <param name="c">文字</param>
+		static bool isMetaChar(char c)
+		{
+			return !(c == '@' || char.IsWhiteSpace(c)) && (int)c < 0x80;
+		}
+
+		/// <summary>
+		/// メタタグを読み込む。
+		/// </summary>
+		/// <returns>読み込んだタグ</returns>
+		Command ReadMeta()
+		{
+			var command = new Command(LineNumber);
+			NextChar(); // skip @
+			command.Name = "meta";
+			command.AddParameter("value", ReadWhile(isMetaChar).ToString());
 			return command;
 		}
 

@@ -49,7 +49,8 @@ namespace Entap.AnimaScript
 			LineNumber = lineNumber;
 			Name = name;
 			Parameters = new Dictionary<string, string>();
-			for (int i = 0; i < parameters.Length - 1; i++) {
+			for (int i = 0; i < parameters.Length - 1; i++)
+			{
 				Parameters.Add(parameters[i], parameters[i + 1]);
 			}
 		}
@@ -71,13 +72,17 @@ namespace Entap.AnimaScript
 		/// <param name="name">名前</param>
 		public T GetParameter<T>(string name)
 		{
-			if (!Parameters.ContainsKey(name)) {
+			if (!Parameters.ContainsKey(name))
+			{
 				throw new AnimaScriptException("Parameter " + name + " is required", LineNumber);
 			}
-			try {
+			try
+			{
 				return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(Parameters[name]);
-			} catch (Exception) {
-				throw new AnimaScriptException("Incorrect format paramter " + name, LineNumber);
+			}
+			catch (Exception)
+			{
+				throw new AnimaScriptException("Incorrect format parameter " + name, LineNumber);
 			}
 		}
 
@@ -90,6 +95,16 @@ namespace Entap.AnimaScript
 		public T GetParameter<T>(string name, T defaultValue)
 		{
 			return Parameters.ContainsKey(name) ? GetParameter<T>(name) : defaultValue;
+		}
+
+		/// <summary>
+		/// パラメータの存在を確認する。
+		/// </summary>
+		/// <returns>パラメータ</returns>
+		/// <param name="name">名前</param>
+		public bool HasParameter(string name)
+		{
+			return Parameters.ContainsKey(name);
 		}
 
 		/// <summary>

@@ -1,20 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace Entap.AnimaScript
 {
-	using AnimaScriptCommandList = List<Command>;
+	using CommandList = List<Command>;
 	using LabelDictionary = Dictionary<string, int>;
+	using MacroDictionary = Dictionary<string, CommandBlock>;
 
 	/// <summary>
 	/// 命令ブロック
 	/// </summary>
-	internal class CommandBlock
+	public class CommandBlock : IEnumerable<Command>
 	{
-		readonly AnimaScriptCommandList _commands;
+		readonly CommandList _commands;
 		LabelDictionary _labels;
+		MacroDictionary _macros;
+
+		/// <summary>
+		/// マクロの辞書を取得する
+		/// </summary>
+		/// <value>マクロの辞書</value>
+		public MacroDictionary Macros {
+			get { return _macros; }
+		}
 
 		/// <summary>
 		/// 空の命令ブロック
@@ -35,10 +44,24 @@ namespace Entap.AnimaScript
 		/// </summary>
 		/// <param name="reader">文字の入力元</param>
 		public CommandBlock(TextReader reader)
+			: this(Lexer.ReadAll(reader))
 		{
-			_commands = Lexer.ReadAll(reader);
+		}
+
+		/// <summary>
+		/// <see cref="T:Entap.AnimaScript.CommandBlock"/> クラスのインスタンスを初期化する。
+		/// </summary>
+		/// <param name="commands">命令の配列</param>
+		public CommandBlock(CommandList commands)
+		{
+			_commands = commands;
+			InitMacros(_commands, out _commands, out _macros);
 			TranslateIfStatement(_commands, out _commands);
 			InitLabels(_commands, out _commands, out _labels);
+		}
+
+		public CommandBlock()
+		{
 		}
 
 		/// <summary>
@@ -48,12 +71,12 @@ namespace Entap.AnimaScript
 		/// </summary>
 		/// <param name="src">トークン配列の入力変数</param>
 		/// <param name="dest">トークン配列の出力変数</param>
-		static void TranslateIfStatement(AnimaScriptCommandList src, out AnimaScriptCommandList dest)
+		static void TranslateIfStatement(CommandList src, out CommandList dest)
 		{
 			var unique = 0;
 			var uStack = new Stack<int>();
 			var eStack = new Stack<int>();
-			dest = new AnimaScriptCommandList();
+			dest = new CommandList();
 			foreach (var command in src) {
 				int u, e;
 				switch (command.Name) {
@@ -137,10 +160,10 @@ namespace Entap.AnimaScript
 		/// <param name="src">トークン配列の入力変数</param>
 		/// <param name="dest">トークン配列の出力変数</param>
 		/// <param name="labels">ラベル辞書の出力変数</param>
-		static void InitLabels(AnimaScriptCommandList src, out AnimaScriptCommandList dest, out LabelDictionary labels)
+		static void InitLabels(CommandList src, out CommandList dest, out LabelDictionary labels)
 		{
 			labels = new LabelDictionary();
-			dest = new AnimaScriptCommandList();
+			dest = new CommandList();
 			foreach (var command in src) {
 				if (command.Name == "label") {
 					var labelName = command.GetParameter<string>("name");
@@ -151,6 +174,49 @@ namespace Entap.AnimaScript
 				} else {
 					dest.Add(command);
 				}
+			}
+		}
+
+		/// <summary>
+		/// マクロの辞書を生成する。その際、マクロ内の命令を除去する。
+		/// </summary>
+		/// <param name="src">トークン配列の入力変数</param>
+		/// <param name="dest">トークン配列の出力変数</param>
+		/// <param name="macros">ラベル辞書の出力変数</param>
+		static void InitMacros(CommandList src, out CommandList dest, out MacroDictionary macros)
+		{
+			macros = new MacroDictionary();
+			dest = new CommandList();
+			Command macroCommand = null;
+			CommandList macroCommandList = null;
+			foreach (var command in src) {
+				if (command.Name == "macro") {
+					if (macroCommand != null) {
+						throw new AnimaScriptException("Unclosed macro", command.LineNumber);
+					}
+					macroCommand = command;
+					macroCommandList = new CommandList();
+				} else if (command.Name == "endmacro") {
+					if (macroCommand == null) {
+						throw new AnimaScriptException("Unexpected endmacro", command.LineNumber);
+					}
+					var macroName = macroCommand.GetParameter<string>("name");
+					if (macros.ContainsKey(macroName)) {
+						throw new AnimaScriptException("Duplicate macro: " + macroName, command.LineNumber);
+					}
+					macros.Add(macroName, new CommandBlock(macroCommandList));
+					macroCommand = null;
+					macroCommandList = null;
+				} else {
+					if (macroCommand != null) {
+						macroCommandList.Add(command);
+					} else {
+						dest.Add(command);
+					}
+				}
+			}
+			if (macroCommand != null) {
+				throw new AnimaScriptException("Unclosed macro");
 			}
 		}
 
@@ -173,6 +239,24 @@ namespace Entap.AnimaScript
 		public Command GetCommand(int address)
 		{
 			return 0 <= address && address < _commands.Count ? _commands[address] : null;
+		}
+
+		/// <summary>
+		/// 命令の列挙を行う
+		/// </summary>
+		/// <returns>命令の列挙</returns>
+		public IEnumerator<Command> GetEnumerator()
+		{
+			return ((IEnumerable<Command>)_commands).GetEnumerator();
+		}
+
+		/// <summary>
+		/// 命令の列挙を行う
+		/// </summary>
+		/// <returns>命令の列挙</returns>
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return ((IEnumerable<Command>)_commands).GetEnumerator();
 		}
 	}
 }
